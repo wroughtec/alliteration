@@ -8,6 +8,17 @@
   <div class="container">
     <h1>Watch for those alerts</h1>
 
+    <form class="js-form">
+      <div class="form-group">
+        <label for="string">Your alliteration</label>
+        <input type="text" class="form-control js-alliteration" id="string"
+          placeholder="Enter an alliteration"
+          pattern="[a-zA-Z ]{3,100}"
+          required
+        >
+      </div>
+      <button type="submit" class="btn btn-default js-submit">Submit</button>
+    </form>
 
   </div>
   <script src="./js/alliteration.js" async defer></script>

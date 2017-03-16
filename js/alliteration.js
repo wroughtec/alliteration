@@ -68,7 +68,8 @@ function checkAlliteration(string) {
 
 
     for (let value of alliteration) {
-      let firstLetter = value.charAt(0);
+      // Take the first letter and make lowercase
+      let firstLetter = value.charAt(0).toLowerCase();
 
       if (firstLetters.get(firstLetter)) {
         firstLetters.get(firstLetter).push(value);
@@ -104,8 +105,8 @@ function checkAlliteration(string) {
   }
 }
 
-// excute each string
-
+/*
+Test strings
 let ex1 = 'Peter Piper Picked a Peck of Pickled Peppers';
 let ex2 = 'Bugs Bunny likes to dance the slow and simple shuffle';
 let ex3 = 'You\'ll never put a better bit of butter on your knife';
@@ -117,3 +118,32 @@ checkAlliteration(ex2);
 checkAlliteration(ex3);
 checkAlliteration(ex4);
 checkAlliteration(ex5);
+*/
+
+// Run string through alliteration function
+
+let form = document.querySelector('.js-form');
+let string = document.querySelector('.js-alliteration');
+
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  checkAlliteration(string.value);
+
+  return false;
+});
+
+string.addEventListener('invalid', function(event) {
+  if(string.validity.valueMissing){
+    event.target.setCustomValidity('Please enter an alliteration');
+  }
+  else if(!string.validity.valid) {
+    event.target.setCustomValidity('Please enter text');
+  }
+  // to avoid the 'sticky' invlaid problem when resuming typing after getting a custom invalid message
+  string.addEventListener('input', function(event){
+    event.target.setCustomValidity('');
+  });
+}, false);
+
+
